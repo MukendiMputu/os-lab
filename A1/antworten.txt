@@ -1,0 +1,24 @@
+1. 'cat a.txt > b.txt' überschreibt die Datei b.txt mit dem Inhalt von a.txt.
+   'cat a.txt >> b.txt' hingegen fügt (append) den Inhalt von a.txt am Ende der
+    Datei b.txt, ohne den vorhandenen Inhalt zu überschreiben.
+
+2. 'ls | grep -c .pdf' gibt die Anzahl der im aktuellen Verzeichnis vorhandenen
+   PDF-Dateien zurück. 'ls' listet den Verzeichnisinhalt aus; durch das Pipe (|)
+   wird dessen Ausgabe nicht gesehen, sondern an 'grep -c .pdf' weitergeleit, wobei
+   letzteres die Anzahl der Vorkommen (durchs Parameter -C) des Patterns '.pdf'
+  zurückgibt.
+
+3. Ein verwaister Prozess ist ein solcher, dessen Elternprozess 'gekillt' wurde,
+  ohne die Möglichkeit, seine Kindprozesse zu beenden. Mit dem Kommando 'kill -9 PID'
+  wird ein Prozess auf diese Weise 'gekillt'.
+  Alle verwaiste Prozesse werden automatisch dem Init-Prozess (PID = 1) untergeordnet.
+
+4. Das Problem mit dem 'for (;;) fork();' ist, dass es in einer endlosen Schleife,
+   Kindprozesse erzeugt werden, die wiederherum auch weitere Prozesse erzeugen.
+   Der Effekt wird auch 'Forkbombe' genannt.
+   Zu Beginn der 1. Generation erzeugt der Urprozess ein Kindprozess, sodass am
+   Ende dieser Generation 2 Prozesse entstehen; in der 2. Generation erzeugen
+   Urprozess und Kindprozess parallel je einen Prozess, est entstehen 4 Prozesse.
+   In der 3. Generation ezeugen alle 4 Prozesse der 2. jeweils einen Prozess; wir
+   haben 8 Prozesse. In der n. Generation werden also 2^n Prozesse erzeugt worden
+   sein.
