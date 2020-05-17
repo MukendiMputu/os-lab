@@ -7,7 +7,7 @@
 
 
 /*
- * Mukendi Mputu , Tobias Weimann , Ahmad Siar Latifi 
+ * Mukendi Mputu , Tobias Weimann , Ahmad Siar Latifi
  */
 
 #define  EXIT_BEFEHLSLAENGE 4
