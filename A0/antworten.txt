@@ -1,0 +1,28 @@
+Aufgabe 0
+
+Theoriefragen:
+  1. Mit ls -R kann man auch die Subdirectories auflisten.
+  2. 'man' steht für manual. Mit diesem Befehl kann man also die Dokumentation
+    für das als Parameter eingegebenen UNIX-Kommando aufrufen.
+
+    Syntaktisch gesehen unterscheiden sich beiden Befehle in der Sektion-Zahl.
+    Mit man 1 printf ruft man die Sektion 1 der printf-Dokumentation und mit dem
+    2. Befehl die Sektion 3.
+
+    Mit dem Kommando 'man man' kann man die Sektionen nach lesen:
+
+    1   User Kommandos (Executable programs)
+    2   System Calls (functions provided by the kernel)
+    3   C Library Funktionen (functions within program libraries)
+    4   Devices and Special Files (usually found in /dev)
+    5   File Formats and Conventions, e.g. /etc/passwd
+    6   Games et. al.
+    7   Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)
+    8   System administration commands (usually only for root)
+    9   Kernel routines [Non standard]
+
+    Mit 'man 1 printf' ruft man also die Dokumentation des Programms /bin/printf
+    und mit 'man 3 printf' die Dokumentation der C Library Funktion printf.
+
+  3. Mit dem UNIX-Kommando 'rm ' (remove) löscht man eine Datei und mit dem Parameter
+     'rm -R ' löscht man einen kompletten Verzeichnisbaum.
