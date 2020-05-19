@@ -81,8 +81,7 @@ int main (int argc, char **argv)
 					fork_return = fork();
 					if (fork_return == 0) { // Code-Block des Kindprozesses
 						printf("\nKindprozess PID: %i, Eltern PID: %i, Processgruppe: %i\n", getpid(), getppid(), getpgrp());
-						// char *argv[5] = {"ps", "f", NULL, NULL, NULL};
-						// execvp(program, &argv[0]);
+
 						execvp(program, &argument_vektor[0]);
 						perror("\e[31mExec Fehler\e[m: ");
 					  exit(1);
@@ -145,7 +144,7 @@ void clear (void)
 
 void extractParameter(char *parameter, char *arg, char *argv[]) {
 	printf("Parameter? (default = ENTER): ");
-	//scanf("%100s", argumente);
+
 	int j; char *src;
 	if (fgets(arg, sizeof(arg), stdin) != NULL){
 		for (j = 1, src = arg; ; j++, src = NULL) {
