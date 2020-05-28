@@ -43,8 +43,8 @@ int main (int argc, char **argv)
 	  do {
 
 			printf("Bitte triff eine Auswahl\n\t[1=ps, 2=ls oder 3=date] : ");
-
-			if (scanf("%d", &wahl))
+			int errorFlag = scanf("%d", &wahl);
+			if (errorFlag)
 			{
 					clear(); // HACK um das Fehlverhalten von scanf herum.
 
