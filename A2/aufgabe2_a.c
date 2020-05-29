@@ -3,6 +3,11 @@
 #include <errno.h>
 #include <stdlib.h>
 
+/*
+ * Mukendi Mputu , Tobias Weimann , Ahmad Siar Latifi
+ */
+
+
 #define NUM_THREADS 5
 #define SLEEP_TIME 3
 

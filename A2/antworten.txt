@@ -1,0 +1,32 @@
+A.  Thread-Synchronisation
+
+1. Scheduling / Synchronisation
+
+VRR
++---+-------------------------------+
+| A |CCC-----CCCEE--CCC----CCCEE---C|
+| B |---CCCEEE--CCCEEE--CCCEEE--CCCE|
+| C |------CCEEEE--C---CEEEE--CCEEEE|
++---+-------------------------------+
+
+FCFS
++---+-------------------------------+
+| A |CCCCCCEE---CCCCCCEE---CCCCCCEE-|
+| B |------CCCEEE-----CCCEEE-----CCC|
+| C |---------CCEEEE-----CCEEEE-----|
++---+-------------------------------+
+
+2. Der Vorteil beim VRR ist, dass Prozesse, welche freiwillig den CPU freigeben,
+  um E/A-Stöße auszuführen, kommen in eine Vorzugsliste, die vor der Ready-Liste
+  abgearbeitet wird. Somit bekommen Prozesse der Vorzugsliste ihre 'gutgeschriebene'
+  Quantum-Restzeit zugeteilt (aber nur eben die Restzeit und nicht mehr).
+  Der vorteilige Effekt ist also, dass E/A-lastige Prozesse fürs freiwillige Abgeben
+  des CPU nicht benachteiligt werden.
+
+3.
+
+B. Analyse
+
+1.
+
+2.
