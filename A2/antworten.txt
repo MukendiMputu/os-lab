@@ -23,10 +23,15 @@ FCFS
   Der vorteilige Effekt ist also, dass E/A-lastige Prozesse fürs freiwillige Abgeben
   des CPU nicht benachteiligt werden.
 
-3.
+3. Semaphoren (span. semáforos: Ampel) sind Datenstrukturen, die verwendet werden,
+  um den Zugriff auf Resourcen zwischen asynchronlaufende Prozesse bzw. Threads zu
+  regulieren. Diese Datenstruktur besteht aus einer int Ganzzahl und zwei Operationen,
+  welche diese Zahl inkrementieren bzw. dekrementieren.
 
 B. Analyse
 
-1.
+1. Solch eine Situation nennt man Race Condition oder auch Wettlaufsituation.
 
-2.
+2. Das Problem kann z.B. entstehen, wennn zwei parallel laufende Prozesse A & B
+  auf die Variable shared_kunden_anzahl zugreifen, um sie zu dekrementieren.
+  Unsynchronisiert
