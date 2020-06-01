@@ -32,6 +32,11 @@ B. Analyse
 
 1. Solch eine Situation nennt man Race Condition oder auch Wettlaufsituation.
 
-2. Das Problem kann z.B. entstehen, wennn zwei parallel laufende Prozesse A & B
-  auf die Variable shared_kunden_anzahl zugreifen, um sie zu dekrementieren.
-  Unsynchronisiert
+2. Angenommen wir haben nur 2 Threads, die jeweils mit einer if-Verzweigug überprüfen,
+  ob die Anzahl der Kunden größer als 0 ist, bevor sie einen Kunden abkassiert.
+  Es kann z.B. passieren, dass genau dann, wenn Thread A die Bedingung positiv
+  überprüft hat, dass diesem den CPU entzogen wird und Thread B zugeteilt wird.
+  Wenn es sich dabei um den letzten Kunden handelt, wird also Thread B, diesen
+  abkassieren und beeden, und ein bisschen später wenn Thread A wieder den CPU
+  zugeteilt wird, auch diese Variable 'Anzahl der Kunden' dekrementieren und somit
+  das Gesamtergebnis von -1 verursachen.

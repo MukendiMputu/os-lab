@@ -27,7 +27,7 @@ struct thread_info {    /* Used as argument to thread_start() */
    int       thread_num;       /* Application-defined thread # */
 };
 
-pthread_mutex_t lock;
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
 // Routine, die von den jeweiligen Kassen (Thread) ausgeführen werden
 // Da c default-mäßig pass-by-value ist, muss die Referenz übergeben werden
@@ -45,7 +45,7 @@ bezahlvorgang(void *param_anzahl_kunden)
       printf("Bearbeite Kunden \e[32m%d\e[m ab...\n", *anzahl_kunden);
       sleep(SLEEP_TIME);
       *anzahl_kunden -= 1;
-      printf("Kunde abgearbeitet und raus.\n");
+      printf("Kunde abgearbeitet und raus.\n\n");
     }
 
     if(pthread_mutex_unlock(&lock))
@@ -61,6 +61,7 @@ int main(int argc, char const *argv[])
   int shared_kunden_anzahl = 42, status;
   struct thread_info *tinfo;
   pthread_attr_t attr;
+  int tnum;
 
   /* Initialize thread creation attributes */
   status = pthread_attr_init(&attr);
@@ -77,7 +78,7 @@ int main(int argc, char const *argv[])
   printf("\nKunden im Supermarkt: \e[32m%d\e[m.\n\n", shared_kunden_anzahl);
 
    /* Für je eine Kasse ein Thread wird erzeugt */
-   for (int tnum = 0; tnum < NUM_THREADS; tnum++) {
+   for (tnum = 0; tnum < NUM_THREADS; tnum++) {
        tinfo[tnum].thread_num = tnum + 1;
 
        // pthread_create() speichert die Thread-ID in die entspreched Variable
@@ -94,7 +95,7 @@ int main(int argc, char const *argv[])
        handle_error_en(status, "pthread_attr_destroy");
 
    /* warte bis alle Threads beendet sind*/
-   for (int tnum = 0; tnum < NUM_THREADS; tnum++) {
+   for (tnum = 0; tnum < NUM_THREADS; tnum++) {
      status = pthread_join(tinfo[tnum].thread_id, NULL);
        if (status != 0)
           handle_error_en(status, "pthread_create");
