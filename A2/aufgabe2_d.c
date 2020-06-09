@@ -8,9 +8,9 @@
  * Mukendi Mputu , Tobias Weimann , Ahmad Siar Latifi
  */
 
-
-#define NUM_THREADS 1
-#define ANZ_EINGAENGE 1
+#define _MULTI_THREADED
+#define NUM_THREADS 5
+#define ANZ_EINGAENGE 2
 #define SLEEP_TIME 3
 
 
