@@ -1,0 +1,63 @@
+Aufgabe 3: Deadlock
+
+Theoriefragen
+
+1. Was ist das Betriebsmittel? Ist es konsumierbar oder wiederverwendbar?
+
+Die Betriebsmittel sind die Zutatenkisten. Da die Kiste für eine gewisse Zeit von dem Koch beansprucht wird 
+und dann erst wieder freigegeben wird, ist das Betriebsmittel wiederverwendbar. 
+Nachdem die Kisten wieder zurückgebracht wurden, können sie wieder von anderen Köchen genutzt werden.
+
+
+2. Damit Verklemmungen entstehen können, müssen bestimmte Vorbedingungen erfüllt sein: mutual exclusion, 
+hold and wait und no preemption. Beschreibt, wodurch diese Bedingungen in der Mensa erfüllt werden.
+Damit wirklich eine Verklemmung entsteht, muss zur Laufzeit noch circular wait eintreten. Beschreibt kurz 
+eine Beispielsituation in der Küche, bei der eine Verklemmung auftritt.
+
+-"mutual exclusion"
+
+Eine Kiste kann nur von einem Koch beansprucht werden. Ist die Kiste im Besitz von einem Koch,
+kann kein anderer Koch in diesem Moment auf sie zugreifen. 
+Er muss warten, bis der Koch sie wieder frei gibt, da sie "unteilbar" ist.
+
+-"hold and wait"
+
+Die Kisten sind nur schrittweise belegbar. Ein Koch kann nur eine Zutatenkiste gleichzeitig holen.
+Bevor er eine nächste holt, verwendet er die aktuelle und benutzt zu keinem Zeitpunkt mehrere.
+
+-"no preemption"
+
+Besitzt ein Koch eine Kiste, kann kein anderer Koch sie fordern oder entreißen. 
+Er muss solange warten, bis der Besitz wieder freigegeben wird. Dies ist der einzige Weg.
+
+-"circular wait": eine geschlossene Kette wechselseitig wartender Prozesse
+
+Eine Beispielsituation ist folgende: In der Mensa gibt es zwei Köche.
+Der erste Koch belegt die erste Zutatenkiste, benötigt aber die zweite um fortzufahren und
+sein Gericht fertigzustellen.
+Der zweite Koch besitzt die zweite Kiste, benötigt aber die erste um sein Gericht fertigzustellen.
+Erst wenn er sein Gericht fertigstellt, gibt er seine Kiste frei.
+Beide Köche warten also gegenseitig darauf, dass der andere seine Kiste frei gibt. Eine Verklemmung entsteht.
+
+3. Zur Verklemmungsvorbeugung wird in Teil b) der Programmieraufgabe eine der Bedingungen für Verklemmungen entkräftet.
+-Um welche Bedingung handelt es sich?
+
+Die Bedingung "hold and wait" wird entkräftet.
+Anders als vorher, kann ein Koch sich mehrere Kisten hintereinander holen, wenn der Kühlschrank für ihn reserviert ist.
+Erst danach fängt er an zu arbeiten.
+
+-Erklärt anhand des Szenarios, warum nun keine Verklemmungen mehr auftreten können.
+
+Es wird sichergestellt, dass zu jeder Zeit mindestens ein Koch arbeiten kann. 
+Zu beginn kann der erste Koch sich alle Ressourcen aussuchen die er benötigt.
+Danach kann er uneingeschränkt arbeiten. Der nächste Koch kann sich aus den übrig gebliebenen Kisten, seine benötigten Kisten aussuchen.
+Entweder alle Kisten die er benötigt sind noch frei oder er muss warten, bis die jeweiligen Kisten zurück gebracht werden.
+Durch das Prinzip des wartens und weil sichergestellt wird, dass mindestens ein Koch zu jeder Zeit arbeiten kann, wird eine Verklemmung vermieden.
+
+-Geht darauf ein, wieso diese Variante der Verklemmungsvorbeugung ineffizient ist. 
+
+Zwar wird durch dieses Verfahren eine Verklemmung vermieden, andererseits kann aber im Worst-Case immer nur ein Koch zeitgleich kochen.
+Der Nachfolger müsste in diesem Fall auf benötigte Kisten warten und die anderen Köche müssten darauf warten dass der Kühlschrank für sie reserviert wird.
+Dies ist ineffizient, man könnte eine Lösung entwickeln, bei der im worst case mehrere Köche jeweils gleichzeitig arbeiten können.
+
+
