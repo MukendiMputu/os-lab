@@ -1,1 +1,43 @@
- 
+1. Speicherverwaltung bei Mehrprogrammbetrie
+
+    Es gibt folgende Adressbingungsarten:
+
+    - absolutes Binden: hier werden die Adressen (für Variablen, Zeiger, etc.) zur Compile-Zeit festvergeben.
+      Programme können also nur in einem festdefinierten Bereich korrekt ablaufen. Vorteil dieser Art ist, dass
+      Overhead für di erneute Allozierung des Speicher beim Einlagern des Prozesses vermieden wird.
+      Doch Nachteil ist, dass Kollisionen mit anderen Prozessdaten passieren können und auch dass der Hauptspeicher
+      ineffizient benutzt wird (z.B kann man keine Kompaktifizierung durchführen).
+
+    - statisches Binden: bei dieser Bindungsart werden Adressen beim Laden des Programms erst absolut vergeben.
+      Der Compiler des Programms liefert die Relokationsinformation mit. Dies bringt den Vorteil, dass
+      Programme überall im Hauptspeicher eingelagert werden können. Und Nachteil ist eben die Erzeugung dieser
+      zusätzichen Informationen.
+
+    - dynamisches Binden: bei dieser Variante werden Adressen nur indirekt auf Operanden gemappt, d.h. eine
+      Mapping-Tabelle wird genutzt, um auf physikalische (absolute) Adressen abbilden zu können. Großer Vorteil
+      ist, dass Programme flexibel im Hauptspeicher alloziert und reloziert werden können, was auch Effizient mitbringt.
+      Nachteil ist, dass Programme so größer und langsamer werden.
+
+
+2. Seitenadressierun
+
+    a) Nein, das Betriebssystem braucht diesen Fall nicht gesondert zu behandeln. Es muss lediglich die Abbildungstabelle
+      angepasst bzw. geändert werden, sodass logische Adressen auf physikalische Adressen erneut abgebildet werden können.
+      Logische Adressen würden auf Referenzen der Abbildungstabelle zeigen, welche wiederherum einfach nur auf neue physikalische
+      Adressen zeigen würden.
+
+    b) Der TLB wird von einem Prozess verwendet, um zu gucken, ob bestimmte, ihm gehörende Seiten im Hauptspeicher präsent
+      oder eingelagert werden müssen. Bei einem Kontextwechsel kommt ein anderer Prozess rein und die Einträge der TLB (falls nicht
+      geflusht/geleert) hätten nichts mit den Seiten zu tun, die ihm gehören. Der TBL müsste also geleert sein, damit neue Prozesse
+      eigene neue Nachschlagereferenzen eintragen können.
+
+3. Platzierungstrategien
+
+  - Bei der Platzierungstrategien Best Fit wird die kleinste passende Lücke gesucht. Dies bringt den Vorteil, dass
+    externe Speicherverschnitte klein gehalten werden. Dies ist aber auch ein Nachteil, da man sehr viele kleine
+    Lücken im Hauptspeicher hat, die nicht sinnvoll bzw. gar nicht mehr benutzt werden können.
+
+  - Bei der Strategie First Fit wird die erstpassende Lücke sofort verwendet. Vorteil ist vielleicht, dass man kein
+    Sortierverfahren auf freie Speichergrößen machen brauch, sondern nur eine Liste aller freien Speicherlücken hält.
+    Ebenfalls kann es passieren, dass externe Verschnitte noch für andere Programme - wenn groß genug - verwendet werden
+    können. Falls nicht, dann entsteht der Nachteil, dass sehr große Speicherverschnitte entstehen können.
