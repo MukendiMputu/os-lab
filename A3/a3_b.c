@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h> 
+#include <unistd.h>
 #include <pthread.h>
 #include "vorgabe.h"
 
@@ -10,14 +10,14 @@ void *work(void *arg)
 
 	printf("[K%d] Ich bin bereit zu kochen!\n", my_num);
 
-    //Aufgabe b) 
+    //Aufgabe b)
 
     for(int i=0; i<MEAL_PER_CHEF; i++)
     {
         //Zunächst wird der Kühlschrank reserviert (der kritische Bereich wird durch mutex lock gesperrt).
         pthread_mutex_init(&lock, NULL);
         pthread_mutex_lock(&lock);
-        
+
         //Das Gericht soll aus MEAL_SIZE vielen Zutaten bestehen. Das Array mit den Informationen zu den Zutaten wird angelegt und das zu kochende Gericht wird generiert.
         ingredient_t *meal[MEAL_SIZE];
         get_meal(meal);
@@ -27,10 +27,10 @@ void *work(void *arg)
         {
             sem_wait(&meal[j]->sem);
         }
-        
+
         //Dannach wird der Kühlschrank wieder freigegeben (mutex unlock).
         pthread_mutex_unlock(&lock);
-        
+
         //Die Zutaten werden verarbeitet.
         for(int k=0; k<MEAL_SIZE; k++)
         {
