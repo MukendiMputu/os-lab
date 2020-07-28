@@ -14,11 +14,14 @@ void *work(void *arg)
 
     for(int i=0; i<MEAL_PER_CHEF; i++)
     {
-        //Zunächst wird der Kühlschrank reserviert (der kritische Bereich wird durch mutex lock gesperrt).
+        //Zunächst wird der Kühlschrank reserviert 
+        // (der kritische Bereich wird durch mutex lock gesperrt).
         pthread_mutex_init(&lock, NULL);
         pthread_mutex_lock(&lock);
 
-        //Das Gericht soll aus MEAL_SIZE vielen Zutaten bestehen. Das Array mit den Informationen zu den Zutaten wird angelegt und das zu kochende Gericht wird generiert.
+        //Das Gericht soll aus MEAL_SIZE vielen Zutaten bestehen. 
+        // Das Array mit den Informationen zu den Zutaten wird angelegt 
+        // und das zu kochende Gericht wird generiert.
         ingredient_t *meal[MEAL_SIZE];
         get_meal(meal);
 
@@ -36,7 +39,8 @@ void *work(void *arg)
         {
             sleep(meal[k]->time_needed);
         }
-        //Schließlich werden die Kisten zurückgebracht (Semaphoren werden freigegeben).
+        //Schließlich werden die Kisten zurückgebracht 
+        //(Semaphoren werden freigegeben).
         for(int l=0; l<MEAL_SIZE; l++)
         {
             sem_post(&meal[l]->sem);

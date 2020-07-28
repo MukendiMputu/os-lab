@@ -15,7 +15,8 @@ void *work(void *arg)
     //Der Koch soll MEAL_PER_CHEF mal Gerichte anrichten, bevor er seine arbeitet beendet.
     for(int i=0; i<MEAL_PER_CHEF; i++)
     {
-        //Das Gericht soll aus MEAL_SIZE vielen Zutaten bestehen. Das Array mit den Informationen zu den Zutaten wird angelegt und das zu kochende Gericht wird generiert.
+        //Das Gericht soll aus MEAL_SIZE vielen Zutaten bestehen. 
+        // Das Array mit den Informationen zu den Zutaten wird angelegt und das zu kochende Gericht wird generiert.
         ingredient_t *meal[MEAL_SIZE];
         get_meal(meal);
 
